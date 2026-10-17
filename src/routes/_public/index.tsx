@@ -31,43 +31,49 @@ function Home() {
 
 	return (
 		<main className="page-wrap px-4 py-14 sm:py-20">
-			<section className="grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:items-center">
-				<div className="min-w-0">
-					<p className="island-kicker mb-3">Ekraf Dashboard</p>
-					<h1 className="display-title text-4xl leading-tight font-bold text-[var(--sea-ink)] sm:text-5xl">
-						Run your catalogue and team access from one secure place.
-					</h1>
-					<p className="mt-5 max-w-xl text-base leading-7 text-[var(--sea-ink-soft)]">
-						Manage products with images, stock and pricing, and control who can administer the app.
-					</p>
-					<div className="mt-8 flex flex-wrap items-center gap-3">
-						{!isPending &&
-							(session?.user ? (
-								<Button asChild size="lg">
-									<Link to="/dashboard">
-										Open dashboard
-										<ArrowRight aria-hidden="true" />
-									</Link>
-								</Button>
-							) : (
-								<Button asChild size="lg">
-									<Link to="/login">
-										Sign in
-										<ArrowRight aria-hidden="true" />
-									</Link>
-								</Button>
-							))}
-						<Button asChild variant="outline" size="lg">
-							<Link to="/setup">First-time setup</Link>
-						</Button>
+			<section className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr] lg:items-stretch">
+				<div className="public-hero relative min-w-0 overflow-hidden rounded-3xl p-7 sm:p-10">
+					<span className="home-emblem" aria-hidden="true">
+						<span />
+					</span>
+					<div className="relative z-10 max-w-2xl">
+						<p className="island-kicker mb-4">Ekraf · Creative operations</p>
+						<h1 className="display-title max-w-xl text-4xl leading-[1.08] font-semibold text-[var(--sea-ink)] sm:text-5xl">
+							Run your catalogue and team access from one secure place.
+						</h1>
+						<p className="mt-5 max-w-lg text-base leading-7 text-[var(--sea-ink-soft)]">
+							Manage products with images, stock and pricing, and control who can administer the
+							app.
+						</p>
+						<div className="mt-8 flex flex-wrap items-center gap-3">
+							{!isPending &&
+								(session?.user ? (
+									<Button asChild size="lg">
+										<Link to="/dashboard">
+											Open dashboard
+											<ArrowRight aria-hidden="true" />
+										</Link>
+									</Button>
+								) : (
+									<Button asChild size="lg">
+										<Link to="/login">
+											Sign in
+											<ArrowRight aria-hidden="true" />
+										</Link>
+									</Button>
+								))}
+							<Button asChild variant="outline" size="lg" className="hero-secondary-button">
+								<Link to="/setup">First-time setup</Link>
+							</Button>
+						</div>
 					</div>
 				</div>
 
-				<ul className="grid gap-4">
+				<ul className="m-0 grid list-none content-center gap-3 p-0">
 					{FEATURES.map((feature) => {
 						const Icon = feature.icon;
 						return (
-							<li key={feature.title} className="island-shell flex gap-4 rounded-2xl p-5">
+							<li key={feature.title} className="feature-card flex gap-4 rounded-2xl p-5">
 								<span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--palm)] text-white">
 									<Icon className="size-5" aria-hidden="true" />
 								</span>

@@ -17,10 +17,12 @@ export default function Header() {
 			<nav className="page-wrap flex items-center justify-between gap-3 py-3" aria-label="Main">
 				<Link
 					to="/"
-					className="inline-flex items-center gap-2 rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm font-semibold text-[var(--sea-ink)] no-underline"
+					className="inline-flex items-center gap-2.5 rounded-xl px-1 py-1 text-sm font-extrabold tracking-tight text-[var(--sea-ink)] no-underline"
 				>
-					<span className="size-2 rounded-full bg-[var(--palm)]" aria-hidden="true" />
-					Ekraf Dashboard
+					<span className="brand-mark" aria-hidden="true" />
+					<span>
+						Ekraf<span className="ml-1 font-medium text-[var(--sea-ink-soft)]">/ workspace</span>
+					</span>
 				</Link>
 
 				<div className="flex items-center gap-2">

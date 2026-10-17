@@ -37,11 +37,16 @@ function writeCollapsed(value: boolean) {
 
 function Brand({ compact }: { compact: boolean }) {
 	return (
-		<Link to="/dashboard" className="flex items-center gap-2 rounded-lg px-2 py-1.5 no-underline">
-			<span className="size-2.5 shrink-0 rounded-full bg-[var(--palm)]" aria-hidden="true" />
+		<Link to="/dashboard" className="flex items-center gap-3 rounded-lg px-2 py-1.5 no-underline">
+			<span className="brand-mark" aria-hidden="true" />
 			{!compact && (
-				<span className="display-title truncate text-lg font-bold text-[var(--sea-ink)]">
-					Ekraf
+				<span className="min-w-0">
+					<span className="display-title block truncate text-lg font-bold text-[var(--sea-ink)]">
+						Ekraf
+					</span>
+					<span className="block text-[9px] font-bold tracking-[0.16em] text-[var(--sea-ink-soft)] uppercase">
+						Workspace
+					</span>
 				</span>
 			)}
 		</Link>
@@ -59,28 +64,31 @@ function NavList({
 }) {
 	const items = NAV_ITEMS.filter((item) => !item.adminOnly || role === "admin");
 	return (
-		<nav aria-label="Admin navigation" className="flex flex-col gap-1">
-			{items.map((item) => {
-				const Icon = item.icon;
-				return (
-					<Link
-						key={item.to}
-						to={item.to}
-						onClick={onNavigate}
-						aria-label={compact ? item.label : undefined}
-						title={compact ? item.label : undefined}
-						className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--sea-ink-soft)] no-underline transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
-						activeProps={{
-							className:
-								"bg-[var(--chip-bg)] text-[var(--sea-ink)] ring-1 ring-[var(--chip-line)] shadow-[0_8px_20px_rgba(30,90,72,0.08)]",
-						}}
-					>
-						<Icon className="size-5 shrink-0" aria-hidden="true" />
-						{!compact && <span className="truncate">{item.label}</span>}
-					</Link>
-				);
-			})}
-		</nav>
+		<div>
+			{!compact && <p className="workspace-label">Workspace</p>}
+			<nav aria-label="Admin navigation" className="flex flex-col gap-1">
+				{items.map((item) => {
+					const Icon = item.icon;
+					return (
+						<Link
+							key={item.to}
+							to={item.to}
+							onClick={onNavigate}
+							aria-label={compact ? item.label : undefined}
+							title={compact ? item.label : undefined}
+							className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--sea-ink-soft)] no-underline transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+							activeProps={{
+								className:
+									"bg-[var(--chip-bg)] text-[var(--sea-ink)] ring-1 ring-[var(--chip-line)] shadow-[0_8px_20px_rgba(30,90,72,0.08)]",
+							}}
+						>
+							<Icon className="size-5 shrink-0" aria-hidden="true" />
+							{!compact && <span className="truncate">{item.label}</span>}
+						</Link>
+					);
+				})}
+			</nav>
+		</div>
 	);
 }
 
@@ -109,7 +117,7 @@ export function AdminShell({
 			<aside
 				aria-label="Sidebar"
 				className={cn(
-					"sticky top-0 hidden h-dvh shrink-0 flex-col border-r border-[var(--line)] bg-[var(--header-bg)] p-3 backdrop-blur-lg transition-[width] duration-200 md:flex",
+					"admin-sidebar sticky top-0 hidden h-dvh shrink-0 flex-col border-r p-3 transition-[width] duration-200 md:flex",
 					collapsed ? "w-[72px]" : "w-64",
 				)}
 			>
@@ -179,9 +187,12 @@ export function AdminShell({
 				</header>
 
 				{/* Desktop top bar */}
-				<header className="sticky top-0 z-30 hidden items-center justify-end gap-3 border-b border-[var(--line)] bg-[var(--header-bg)] px-8 py-3 backdrop-blur-lg md:flex">
-					<div className="mr-auto text-sm text-[var(--sea-ink-soft)]">
-						Signed in as <span className="font-semibold text-[var(--sea-ink)]">{user.email}</span>
+				<header className="admin-topbar sticky top-0 z-30 hidden items-center justify-end gap-3 border-b border-[var(--line)] px-8 py-3 md:flex">
+					<div className="mr-auto flex items-center gap-3 text-sm text-[var(--sea-ink-soft)]">
+						<UserAvatar name={user.name} email={user.email} />
+						<span>
+							Signed in as <span className="font-semibold text-[var(--sea-ink)]">{user.email}</span>
+						</span>
 					</div>
 					<ThemeToggle />
 					<SignOutButton />

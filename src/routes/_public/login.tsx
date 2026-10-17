@@ -99,7 +99,7 @@ function LoginPage() {
 		<main className="flex min-h-[calc(100dvh-9rem)] items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="mb-6 text-center">
-					<span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-2xl bg-[var(--palm)] text-white shadow-[0_12px_30px_rgba(47,106,74,0.3)]">
+					<span className="mx-auto mb-4 flex size-12 items-center justify-center rounded-2xl bg-[var(--lagoon)] text-[var(--sea-ink)] shadow-[0_10px_28px_rgba(82,112,46,0.2)]">
 						<ShieldCheck className="size-6" aria-hidden="true" />
 					</span>
 					<h1 className="display-title text-3xl font-bold text-[var(--sea-ink)]">
@@ -112,7 +112,7 @@ function LoginPage() {
 					</p>
 				</div>
 
-				<section className="island-shell rounded-2xl p-6 sm:p-8">
+				<section className="auth-card island-shell rounded-2xl p-6 sm:p-8">
 					<div className="mb-6 grid grid-cols-2 gap-1 rounded-xl bg-[var(--chip-bg)] p-1">
 						{(["signin", "signup"] as const).map((option) => (
 							<button

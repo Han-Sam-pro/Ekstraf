@@ -3,7 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Package, Plus, Users } from "lucide-react";
 
 import { ProductThumb } from "@/components/product-bits";
-import { EmptyState, ErrorState, PageHeader, Panel, SkeletonRows } from "@/components/states";
+import { EmptyState, ErrorState, Panel, SkeletonRows } from "@/components/states";
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
 import { PRODUCTS_QUERY_KEY, USERS_QUERY_KEY } from "@/lib/query-keys";
@@ -37,25 +37,29 @@ function Dashboard() {
 
 	return (
 		<>
-			<PageHeader
-				kicker="Overview"
-				title={firstName ? `Welcome back, ${firstName}` : "Dashboard"}
-				description={
-					isAdmin
-						? "Your catalogue and team at a glance."
-						: "Browse the catalogue. Ask an administrator for editing access."
-				}
-				actions={
-					isAdmin && (
+			<section className="dashboard-welcome mb-6 flex flex-col gap-5 rounded-2xl p-6 sm:flex-row sm:items-end sm:justify-between sm:p-8">
+				<div className="relative z-10 max-w-2xl">
+					<p className="island-kicker mb-3">Overview</p>
+					<h1 className="display-title m-0 text-3xl font-semibold sm:text-4xl">
+						{firstName ? `Welcome back, ${firstName}` : "Dashboard"}
+					</h1>
+					<p className="m-0 mt-2 max-w-xl text-sm leading-6 sm:text-base">
+						{isAdmin
+							? "Your catalogue and team at a glance."
+							: "Browse the catalogue. Ask an administrator for editing access."}
+					</p>
+				</div>
+				{isAdmin && (
+					<div className="relative z-10 shrink-0">
 						<Button asChild>
 							<Link to="/products" search={{ new: true }}>
 								<Plus aria-hidden="true" />
 								Add product
 							</Link>
 						</Button>
-					)
-				}
-			/>
+					</div>
+				)}
+			</section>
 
 			<div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 				<Stat label="Products" value={productsQuery.data ? products.length : null} />
@@ -166,7 +170,7 @@ function Stat({
 }) {
 	const loading = valueText === undefined && (value === null || value === undefined) && !error;
 	return (
-		<div className="island-shell rounded-2xl p-5">
+		<div className="dashboard-stat island-shell rounded-2xl p-5">
 			<p className="m-0 text-sm font-medium text-[var(--sea-ink-soft)]">{label}</p>
 			{loading ? (
 				<span
